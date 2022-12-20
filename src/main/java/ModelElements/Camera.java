@@ -7,6 +7,10 @@ public class Camera {
     Point3D location;
     Angle3D angle;
 
+    public Camera(){
+
+    }
+
     public void rotate(Angle3D newAngle){
         this.angle = newAngle;
     }

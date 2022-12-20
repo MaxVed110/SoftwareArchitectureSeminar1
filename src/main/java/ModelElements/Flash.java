@@ -13,6 +13,9 @@ public class Flash {
     Color color;
     Float power;
 
+    public Flash(){
+
+    }
     /**
      * поворот источника света
      * @param newAngle

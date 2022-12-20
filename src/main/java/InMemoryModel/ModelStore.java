@@ -1,31 +1,31 @@
 package InMemoryModel;
 
-import ModelElements.Camera;
-import ModelElements.Flash;
-import ModelElements.PoligonalModel;
-import ModelElements.Scene;
+import ModelElements.*;
 
 import java.util.ArrayList;
 
+/**
+ * Хранилище
+ */
 public class ModelStore implements ModelChanger {
-    PoligonalModel models;
-    Scene scene;
-    ArrayList<Flash> flashes;
-    Camera camera;
-    private IModelChangedObserver changeObservers;
+    ArrayList<PoligonalModel> models = new ArrayList<>();
+    ArrayList<Scene> scenes = new ArrayList<>();
+    ArrayList<Flash> flashes = new ArrayList<>();
+    ArrayList<Camera> cameras = new ArrayList<>();
+    private ArrayList<IModelChangedObserver> changeObservers = new ArrayList<>();
 
-    public Scene getScene(int id){
-        this.scene = new Scene();
-        this.scene.id = id;
-        this.models = new PoligonalModel();
-        this.scene.models = models;
-        this.flashes.add(new Flash());
-        return this.scene;
+    public ModelStore(Texture texture){
+        models.add(new PoligonalModel(texture));
+        flashes.add(new Flash());
+        cameras.add(new Camera());
+        scenes.add(new Scene(models.get(0),cameras.get(0), flashes.get(0)));
     }
 
+    public Scene getScene(int id){
+        return scenes.get(id);
+    }
 
     @Override
-    public void NotifyChange(IModelChangedObserver model) {
-        this.changeObservers = model;
+    public void notifyChange(IModelChangedObserver model) {
     }
 }
